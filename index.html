@@ -73,8 +73,6 @@ input[type=text]{width:100%;font:inherit;font-size:1.05rem;border:2px solid #e2d
 .spin{text-align:center;color:#fff;padding:40px 0}
 .foot{text-align:center;margin-top:20px}
 .foot a{color:rgba(255,255,255,.85);font-size:.82rem;cursor:pointer;text-decoration:underline}
-.live{text-align:center;font-weight:700;border-radius:12px;padding:6px 10px;margin-bottom:10px;font-size:.85rem}
-.live.on{background:#d9fbe6;color:#0b6b32}.live.off{background:#ffe9cf;color:#8a4700}
 .adminrow{display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid #ece6f7;padding:10px 0}
 .adminrow:last-child{border-bottom:0}
 .adminrow .txt{flex:1;min-width:0}
@@ -86,10 +84,11 @@ input[type=text]{width:100%;font:inherit;font-size:1.05rem;border:2px solid #e2d
 
 <script>
 /* =====================================================================
-   SETTINGS
+   SETTINGS — this is the ONLY thing that ties the site to your backend.
+   Keep this exactly equal to the "Web app URL" from Apps Script > Deploy.
    ===================================================================== */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwm-ewKJ4_lz-JX6qgJ-v58qyXb9YvuZ0Eo1sP2qrPjRn1bUFUtoErNP1OZh5ElNqu/exec";  // <-- paste your Suggestions Apps Script Web app URL here (ends with /exec)
-const HEAD_PASSWORD_LOCAL = "Eis@Ethos@123"; // only used if you never set up the server
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwm-ewKJ4_lz-JX6qgJ-v58qyXb9YvuZ0Eo1sP2qrPjRn1bUFUtoErNP1OZh5ElNqu/exec";
+const HEAD_PASSWORD_LOCAL = "Eis@Ethos@123"; // only used as a fallback if the server can't be reached
 
 /* =====================================================================
    ROSTER — same names as the Student Council roster
@@ -110,17 +109,33 @@ YEARS.forEach(y=>{STUDENTS[y]={};CLASSES.forEach(c=>{STUDENTS[y][c]=(ROSTER[y][c
 function studentById(id){for(const y of YEARS)for(const c of CLASSES)for(const p of STUDENTS[y][c])if(p.id===id)return p;return null}
 
 /* =====================================================================
-   SERVER
+   SERVER — talks to the Apps Script backend
    ===================================================================== */
 let serverMode=false;
+let lastServerError="";
 async function api(action,body){
   const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),12000);
   try{
-    const r=await fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify({...(body||{}),action}),redirect:"follow",cache:"no-store",signal:ctl.signal});
-    const t=await r.text();return JSON.parse(t);
+    const r=await fetch(APPS_SCRIPT_URL,{
+      method:"POST",
+      body:JSON.stringify({...(body||{}),action}),
+      redirect:"follow",
+      cache:"no-store",
+      signal:ctl.signal
+    });
+    const t=await r.text();
+    return JSON.parse(t);
+  }catch(e){
+    lastServerError=String((e&&e.message)||e);
+    throw e;
   }finally{clearTimeout(to)}
 }
-async function detectServer(){try{const j=await api("ping");serverMode=!!(j&&j.ok&&j.app==="ethos-suggestions")}catch(e){serverMode=false}}
+async function detectServer(){
+  try{
+    const j=await api("ping");
+    serverMode=!!(j&&j.ok&&j.app==="ethos-suggestions");
+  }catch(e){serverMode=false}
+}
 
 /* =====================================================================
    IDENTITY (stored on this device so students don't re-pick every visit)
@@ -133,7 +148,7 @@ let ME=getMe();
 let adminPass=null;
 
 /* =====================================================================
-   POPUP
+   POPUP / TOAST helpers
    ===================================================================== */
 function popup({title="",text="",input=null,inputVal="",buttons=[{label:"OK",cls:""}]}){
   const ov=document.createElement("div");ov.className="ov";
@@ -168,7 +183,7 @@ const login={year:null,cls:null};
 function screenLogin(){
   app.innerHTML=`${hero("Student Council Suggestions","Who's voting today? Pick your year group 🎒")}
   <div class="card"><div class="yeargrid" id="yg"></div></div>
-  ${serverMode?"":`<div class="note">⚠️ Not connected to the server yet — set APPS_SCRIPT_URL in the code once it's deployed.</div>`}`;
+  ${serverMode?"":`<div class="note">⚠️ Not connected to the server yet — check APPS_SCRIPT_URL and your Apps Script deployment.</div>`}`;
   const cols=["linear-gradient(135deg,#ff4fa3,#ff7b2f)","linear-gradient(135deg,#3a86ff,#19d3c5)","linear-gradient(135deg,#8338ec,#ff4fa3)","linear-gradient(135deg,#2fd66b,#19d3c5)"];
   document.getElementById("yg").innerHTML=YEARS.map((y,i)=>`<button class="ybtn" data-y="${y}" style="background:${cols[i%cols.length]}">Year<b>${y}</b></button>`).join("");
   document.querySelectorAll(".ybtn").forEach(b=>b.onclick=()=>{login.year=+b.dataset.y;login.cls=null;go(screenLoginClass)});
