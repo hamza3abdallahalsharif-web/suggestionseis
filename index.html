@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ethos International School — Student Council Suggestions</title>
+<link rel="icon" href="hamza.png">
+<style>
+:root{
+  --purple:#8338ec;--pink:#ff4fa3;--teal:#19d3c5;--blue:#3a86ff;--green:#2fd66b;--yellow:#ffd23f;
+  --ink:#241a3d;--ink-soft:#6d6485;--card:#ffffff;--card-2:#f3effc;--bg1:#8338ec;--bg2:#ff4fa3;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:linear-gradient(135deg,var(--bg1),var(--bg2) 60%,var(--blue));background-attachment:fixed;min-height:100vh}
+#app{max-width:760px;margin:0 auto;padding:18px 16px 90px}
+.hero{text-align:center;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.18);margin:10px 0 18px}
+.logo-c{width:84px;height:84px;border-radius:50%;background:#fff;border:5px solid var(--yellow);box-shadow:0 6px 0 rgba(0,0,0,.18);overflow:hidden;margin:0 auto 8px}
+.logo-c img{width:100%;height:100%;object-fit:contain;display:block}
+.hero h1{margin:2px 0;font-size:clamp(1.3rem,4.4vw,1.9rem)}
+.hero p{margin:0;opacity:.95;font-size:1rem}
+.card{background:var(--card);border-radius:22px;padding:18px;box-shadow:0 8px 0 rgba(0,0,0,.14),0 18px 30px rgba(0,0,0,.18);margin-bottom:14px;animation:pop .15s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.92) translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.center{text-align:center}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+.btn{font:inherit;font-weight:700;font-size:1rem;border:0;border-radius:14px;padding:11px 20px;cursor:pointer;color:#fff;
+  background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 5px 0 rgba(0,0,0,.2);transition:transform .07s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.btn.green{background:linear-gradient(135deg,var(--teal),var(--green))}
+.btn.red{background:linear-gradient(135deg,#ff4f5a,#ff7b2f)}
+.btn.ghost{background:var(--card-2);color:var(--ink);box-shadow:none;border:2px solid #e2dbf5}
+.btn.sm{font-size:.85rem;padding:7px 14px;border-radius:11px;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.yeargrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px;margin-top:6px}
+.ybtn{border:0;font:inherit;color:#fff;border-radius:18px;padding:16px 6px;cursor:pointer;font-weight:700;box-shadow:0 6px 0 rgba(0,0,0,.2);transition:transform .07s;text-align:center}
+.ybtn b{display:block;font-size:1.9rem;line-height:1}
+.ybtn:active{transform:translateY(3px)}
+.namegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:6px}
+.namebtn{border:0;font:inherit;background:var(--card-2);color:var(--ink);border-radius:16px;padding:14px 10px;cursor:pointer;font-weight:600;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,.1);transition:transform .07s}
+.namebtn:active{transform:translateY(3px)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:4px 0}
+.tab{font:inherit;font-weight:700;font-size:.92rem;border:0;border-radius:13px;padding:8px 14px;cursor:pointer;background:rgba(255,255,255,.22);color:#fff;box-shadow:none;border:2px solid rgba(255,255,255,.55)}
+.tab.on{background:#fff;color:var(--purple);border-color:#fff}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);border-radius:18px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.whoami{color:#fff;font-weight:700;font-size:.92rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.whoami small{font-weight:500;opacity:.85;cursor:pointer;text-decoration:underline}
+.note{background:var(--card-2);border-radius:14px;padding:10px 14px;margin:8px 0;font-size:.94rem;color:var(--ink-soft);text-align:center}
+.sugg{border-bottom:1px solid #ece6f7;padding:12px 0}
+.sugg:last-child{border-bottom:0}
+.sugg .txt{font-size:1.05rem;line-height:1.35;margin-bottom:8px}
+.meta{font-size:.78rem;color:var(--ink-soft);margin-bottom:8px}
+.meter{display:flex;height:10px;border-radius:8px;overflow:hidden;background:#ece6f7;margin-bottom:8px}
+.meter .a{background:linear-gradient(90deg,var(--teal),var(--green))}
+.meter .d{background:linear-gradient(90deg,#ff7b2f,#ff4f5a)}
+.counts{display:flex;justify-content:space-between;font-size:.8rem;color:var(--ink-soft);margin-bottom:8px}
+.votebtns{display:flex;gap:8px}
+.votebtn{flex:1;font:inherit;font-weight:700;border-radius:13px;padding:9px 6px;cursor:pointer;border:2px solid #e2dbf5;background:#fff;color:var(--ink);transition:transform .07s}
+.votebtn:active{transform:translateY(2px)}
+.votebtn.agree.on{background:linear-gradient(135deg,var(--teal),var(--green));color:#fff;border-color:transparent}
+.votebtn.disagree.on{background:linear-gradient(135deg,#ff7b2f,#ff4f5a);color:#fff;border-color:transparent}
+.notewrap{margin-top:8px}
+.notewrap textarea,.ta{width:100%;font:inherit;font-size:.92rem;border:2px solid #e2dbf5;border-radius:12px;padding:8px 10px;resize:vertical;min-height:44px;background:var(--card-2);color:var(--ink)}
+.notelink{font-size:.8rem;color:var(--purple);cursor:pointer;text-decoration:underline}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;border-radius:8px;padding:2px 8px;margin-left:6px}
+.badge.pending{background:#ffe9cf;color:#8a4700}
+.badge.approved{background:#d9fbe6;color:#0b6b32}
+.badge.rejected{background:#ffe0e0;color:#8a1f1f}
+input[type=text]{width:100%;font:inherit;font-size:1.05rem;border:2px solid #e2dbf5;border-radius:14px;padding:10px 12px;background:var(--card-2);color:var(--ink)}
+.ov{position:fixed;inset:0;background:rgba(20,8,60,.6);backdrop-filter:blur(3px);z-index:150;display:grid;place-items:center;padding:16px}
+.pop-box{background:#fff;color:var(--ink);border-radius:24px;padding:22px;max-width:420px;width:100%;box-shadow:0 12px 0 rgba(0,0,0,.2),0 26px 50px rgba(0,0,0,.4)}
+.pop-box h3{margin:0 0 8px;font-size:1.25rem;text-align:center}
+.pop-box p{margin:0 0 12px;color:var(--ink-soft);text-align:center;font-size:.96rem}
+.spin{text-align:center;color:#fff;padding:40px 0}
+.foot{text-align:center;margin-top:20px}
+.foot a{color:rgba(255,255,255,.85);font-size:.82rem;cursor:pointer;text-decoration:underline}
+.live{text-align:center;font-weight:700;border-radius:12px;padding:6px 10px;margin-bottom:10px;font-size:.85rem}
+.live.on{background:#d9fbe6;color:#0b6b32}.live.off{background:#ffe9cf;color:#8a4700}
+.adminrow{display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid #ece6f7;padding:10px 0}
+.adminrow:last-child{border-bottom:0}
+.adminrow .txt{flex:1;min-width:0}
+.adminrow .btns{display:flex;gap:6px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =====================================================================
+   SETTINGS
+   ===================================================================== */
+const APPS_SCRIPT_URL = "";  // <-- paste your Suggestions Apps Script Web app URL here (ends with /exec)
+const HEAD_PASSWORD_LOCAL = "Eis@Ethos@123"; // only used if you never set up the server
+
+/* =====================================================================
+   ROSTER — same names as the Student Council roster
+   ===================================================================== */
+const YEARS=[5,6,7,8,9,10,11];
+const CLASSES=["A","B","C","D"];
+const ROSTER={
+  5:{A:["Anas Mahmoud"],B:[],C:["Hala El Gazzar","Khadija Mohammed"],D:["Yassin Ghandour","Yaseen Elsayed"]},
+  6:{A:["Adham Elgamasy"],B:[],C:["Yassin Elborey"],D:["Youssef Adds","Karim Rayhan","Zein Amin"]},
+  7:{A:["Omar Hafez"],B:["Omar Marzban","Eyad Eltrahony"],C:["Cameila Bayad","Ismail Halabi"],D:["Yehia EL deeb","Shaida Kabashi","Nada Hassan"]},
+  8:{A:[],B:["Mostafa Aref"],C:[],D:["Omar Elmessiry","Lana Moawad","Hamza Elzahar","Hamza El sherif"]},
+  9:{A:["Youssef Darwish"],B:["Ishaq Darwish","Habiba Abdelmawgood","Farah Hassan","Mariam Mourad"],C:["Rokaia Mohamed"],D:[]},
+  10:{A:["Mariam Khattab","Youssef Makhlafi","Khadija Sharaf"],B:[],C:[],D:["Kadija Yasser"]},
+  11:{A:[],B:["Aisha El Samman","Mariam Amr","Carma Mohamed"],C:["Yassin Karim Ezzat","Hamza El Sherif"],D:[]}
+};
+const STUDENTS={};
+YEARS.forEach(y=>{STUDENTS[y]={};CLASSES.forEach(c=>{STUDENTS[y][c]=(ROSTER[y][c]||[]).map((nm,i)=>({id:`${y}${c}-${i+1}`,name:nm,year:y,cls:c}))})});
+function studentById(id){for(const y of YEARS)for(const c of CLASSES)for(const p of STUDENTS[y][c])if(p.id===id)return p;return null}
+
+/* =====================================================================
+   SERVER
+   ===================================================================== */
+let serverMode=false;
+async function api(action,body){
+  const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),12000);
+  try{
+    const r=await fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify({...(body||{}),action}),redirect:"follow",cache:"no-store",signal:ctl.signal});
+    const t=await r.text();return JSON.parse(t);
+  }finally{clearTimeout(to)}
+}
+async function detectServer(){try{const j=await api("ping");serverMode=!!(j&&j.ok&&j.app==="ethos-suggestions")}catch(e){serverMode=false}}
+
+/* =====================================================================
+   IDENTITY (stored on this device so students don't re-pick every visit)
+   ===================================================================== */
+const K_ME="ethos_sugg_me_v1";
+function getMe(){try{return JSON.parse(localStorage.getItem(K_ME))}catch(e){return null}}
+function setMe(p){try{localStorage.setItem(K_ME,JSON.stringify(p))}catch(e){}}
+function clearMe(){try{localStorage.removeItem(K_ME)}catch(e){}}
+let ME=getMe();
+let adminPass=null;
+
+/* =====================================================================
+   POPUP
+   ===================================================================== */
+function popup({title="",text="",input=null,inputVal="",buttons=[{label:"OK",cls:""}]}){
+  const ov=document.createElement("div");ov.className="ov";
+  ov.innerHTML=`<div class="pop-box"><h3>${title}</h3>${text?`<p>${text}</p>`:""}${input==="textarea"?`<textarea id="popIn" class="ta" rows="4" placeholder="Type here…">${inputVal}</textarea>`:input?`<input id="popIn" type="${input}" value="${inputVal}">`:""}<div class="row" style="margin-top:14px"></div></div>`;
+  const row=ov.querySelector(".row");
+  buttons.forEach(b=>{
+    const el=document.createElement("button");el.className="btn "+(b.cls||"");el.textContent=b.label;
+    el.onclick=()=>{const v=input?ov.querySelector("#popIn").value:null;if(b.keep){if(b.fn)b.fn(v,ov);return}ov.remove();if(b.fn)b.fn(v)};
+    row.appendChild(el);
+  });
+  document.body.appendChild(ov);
+  const inp=ov.querySelector("#popIn");if(inp)setTimeout(()=>inp.focus(),20);
+  return ov;
+}
+function toast(msg){
+  const t=document.createElement("div");t.textContent=msg;
+  t.style.cssText="position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#241a3d;color:#fff;padding:10px 18px;border-radius:14px;z-index:200;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.3)";
+  document.body.appendChild(t);setTimeout(()=>t.remove(),2200);
+}
+
+/* =====================================================================
+   SHELL
+   ===================================================================== */
+const app=document.getElementById("app");
+const hero=(title,sub)=>`<div class="hero"><div class="logo-c"><img src="hamza.png" alt="Ethos International School"></div><h1>${title}</h1>${sub?`<p>${sub}</p>`:""}</div>`;
+function go(fn){app.innerHTML="";window.scrollTo({top:0,behavior:"smooth"});fn()}
+
+/* =====================================================================
+   LOGIN — pick Year, then Class, then Name
+   ===================================================================== */
+const login={year:null,cls:null};
+function screenLogin(){
+  app.innerHTML=`${hero("Student Council Suggestions","Who's voting today? Pick your year group 🎒")}
+  <div class="card"><div class="yeargrid" id="yg"></div></div>
+  ${serverMode?"":`<div class="note">⚠️ Not connected to the server yet — set APPS_SCRIPT_URL in the code once it's deployed.</div>`}`;
+  const cols=["linear-gradient(135deg,#ff4fa3,#ff7b2f)","linear-gradient(135deg,#3a86ff,#19d3c5)","linear-gradient(135deg,#8338ec,#ff4fa3)","linear-gradient(135deg,#2fd66b,#19d3c5)"];
+  document.getElementById("yg").innerHTML=YEARS.map((y,i)=>`<button class="ybtn" data-y="${y}" style="background:${cols[i%cols.length]}">Year<b>${y}</b></button>`).join("");
+  document.querySelectorAll(".ybtn").forEach(b=>b.onclick=()=>{login.year=+b.dataset.y;login.cls=null;go(screenLoginClass)});
+}
+function screenLoginClass(){
+  const avail=CLASSES.filter(c=>STUDENTS[login.year][c].length>0);
+  app.innerHTML=`${hero(`Year ${login.year}`,"Now pick your class")}
+  <div class="card"><div class="tabs">${avail.map(c=>`<button class="tab" data-c="${c}">${login.year}${c}</button>`).join("")}</div>
+  ${avail.length?"":`<div class="note">No students listed for Year ${login.year} yet.</div>`}
+  <div class="center" style="margin-top:14px"><button class="btn ghost" id="back">⬅ Back</button></div></div>`;
+  document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{login.cls=b.dataset.c;go(screenLoginName)});
+  document.getElementById("back").onclick=()=>go(screenLogin);
+}
+function screenLoginName(){
+  const list=STUDENTS[login.year][login.cls];
+  app.innerHTML=`${hero(`Class ${login.year}${login.cls}`,"Tap your name")}
+  <div class="card"><div class="namegrid">${list.map(p=>`<button class="namebtn" data-id="${p.id}">${p.name}</button>`).join("")}</div>
+  <div class="center" style="margin-top:14px"><button class="btn ghost" id="back">⬅ Back</button></div></div>`;
+  document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>{
+    const p=studentById(b.dataset.id);ME=p;setMe(p);go(screenHome);
+  });
+  document.getElementById("back").onclick=()=>go(screenLoginClass);
+}
+
+/* =====================================================================
+   HOME — top bar + nav + tab panes
+   ===================================================================== */
+let homeTab="feed";
+async function screenHome(){
+  app.innerHTML=`
+  <div class="topbar">
+    <div class="whoami">👋 ${ME.name} <small id="switchLink">(Year ${ME.year}${ME.cls}, not you? switch)</small></div>
+    <button class="btn sm green" id="addBtn">➕ Add a suggestion</button>
+  </div>
+  ${hero("Student Council Suggestions","Ideas approved by the Head of School — have your say!")}
+  <div class="tabs" id="mainTabs">
+    <button class="tab" data-t="feed">📋 Suggestions</button>
+    <button class="tab" data-t="mine">📝 My Responses</button>
+    <button class="tab" data-t="submitted">🙋 My Suggestions</button>
+  </div>
+  <div id="pane"><div class="spin">⏳ Loading…</div></div>
+  <div class="foot"><a id="adminLink">🔐 Head of School</a></div>`;
+  document.getElementById("switchLink").onclick=()=>{
+    popup({title:"Switch user?",text:"You'll need to pick your year and name again.",buttons:[
+      {label:"Cancel",cls:"ghost"},
+      {label:"Yes, switch",cls:"red",fn:()=>{clearMe();ME=null;go(screenLogin)}}
+    ]});
+  };
+  document.getElementById("addBtn").onclick=openAddSuggestion;
+  document.getElementById("adminLink").onclick=openAdminLogin;
+  const setTab=()=>document.querySelectorAll("#mainTabs .tab").forEach(t=>t.classList.toggle("on",t.dataset.t===homeTab));
+  document.querySelectorAll("#mainTabs .tab").forEach(t=>t.onclick=()=>{homeTab=t.dataset.t;setTab();loadPane()});
+  setTab();
+  await loadPane();
+}
+async function loadPane(){
+  const pane=document.getElementById("pane");
+  pane.innerHTML=`<div class="spin">⏳ Loading…</div>`;
+  if(homeTab==="feed")await paintFeed(pane);
+  else if(homeTab==="mine")await paintMine(pane);
+  else await paintSubmitted(pane);
+}
+
+/* ---------------- Suggestions feed (approved, agree/disagree) ---------------- */
+async function paintFeed(pane){
+  let list=[];
+  try{const j=await api("suggestions_list",{studentKey:ME.id});if(j&&j.ok)list=j.suggestions||[]}catch(e){}
+  if(!list.length){pane.innerHTML=`<div class="card"><div class="note">No suggestions have been approved yet. Check back soon, or add your own idea! 💡</div></div>`;return}
+  pane.innerHTML=`<div class="card">${list.map(suggRow).join("")}</div>`;
+  wireSuggRows(pane,list);
+}
+function suggRow(s){
+  const total=Math.max(1,s.agree+s.disagree);
+  const aPct=Math.round(s.agree/total*100),dPct=100-aPct;
+  return `<div class="sugg" data-id="${s.id}">
+    <div class="txt">${escapeHtml(s.text)}</div>
+    <div class="meter"><div class="a" style="width:${aPct}%"></div><div class="d" style="width:${dPct}%"></div></div>
+    <div class="counts"><span>👍 ${s.agree} agree</span><span>👎 ${s.disagree} disagree</span></div>
+    <div class="votebtns">
+      <button class="votebtn agree ${s.mine==="agree"?"on":""}" data-r="agree">👍 Agree</button>
+      <button class="votebtn disagree ${s.mine==="disagree"?"on":""}" data-r="disagree">👎 Disagree</button>
+    </div>
+    <div class="notewrap">
+      ${s.mine?`<a class="notelink" data-note="${s.id}">${s.myComment?"✏️ edit my note":"💬 add a note (optional)"}</a><div class="ta-holder" data-hold="${s.id}"></div>`:`<small style="color:var(--ink-soft)">Pick agree or disagree to add an optional note.</small>`}
+    </div>
+  </div>`;
+}
+function escapeHtml(s){const d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function wireSuggRows(pane,list){
+  const byId={};list.forEach(s=>byId[s.id]=s);
+  pane.querySelectorAll(".sugg").forEach(row=>{
+    const id=row.dataset.id;
+    row.querySelectorAll(".votebtn").forEach(b=>b.onclick=async()=>{
+      const resp=b.dataset.r;
+      b.closest(".sugg").querySelectorAll(".votebtn").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");
+      try{
+        const j=await api("respond",{studentKey:ME.id,name:ME.name,year:ME.year,cls:ME.cls,suggId:id,response:resp,comment:byId[id].myComment||""});
+        if(!j||!j.ok){toast("Couldn't save — try again");return}
+        byId[id].mine=resp;toast(resp==="agree"?"👍 Marked as agree":"👎 Marked as disagree");
+        loadPane();
+      }catch(e){toast("Couldn't save — try again")}
+    });
+    const noteLink=row.querySelector("[data-note]");
+    if(noteLink)noteLink.onclick=()=>{
+      const holder=row.querySelector("[data-hold]");
+      if(holder.querySelector("textarea")){holder.innerHTML="";return}
+      holder.innerHTML=`<textarea class="ta" rows="2" placeholder="Say a bit more (optional)…">${byId[id].myComment||""}</textarea><div class="row" style="margin-top:6px;justify-content:flex-end"><button class="btn sm green" data-save>💾 Save note</button></div>`;
+      holder.querySelector("[data-save]").onclick=async()=>{
+        const txt=holder.querySelector("textarea").value;
+        const mine=byId[id].mine;
+        if(!mine){toast("Pick agree or disagree first");return}
+        try{
+          const j=await api("respond",{studentKey:ME.id,name:ME.name,year:ME.year,cls:ME.cls,suggId:id,response:mine,comment:txt});
+          if(j&&j.ok){byId[id].myComment=txt;toast("Note saved");loadPane()}else toast("Couldn't save — try again")
+        }catch(e){toast("Couldn't save — try again")}
+      };
+    };
+  });
+}
+
+/* ---------------- My Responses (review / change what I've already answered) ---------------- */
+async function paintMine(pane){
+  let list=[];
+  try{const j=await api("my_responses",{studentKey:ME.id});if(j&&j.ok)list=j.responses||[]}catch(e){}
+  if(!list.length){pane.innerHTML=`<div class="card"><div class="note">You haven't responded to any suggestions yet — head to the Suggestions tab!</div></div>`;return}
+  pane.innerHTML=`<div class="card">${list.map(r=>`<div class="sugg">
+    <div class="txt">${escapeHtml(r.text)}${r.gone?`<span class="badge rejected">no longer active</span>`:""}</div>
+    <div class="meta">You said: ${r.response==="agree"?"👍 Agree":"👎 Disagree"}${r.comment?` — "${escapeHtml(r.comment)}"`:""}</div>
+  </div>`).join("")}</div>
+  <div class="note">To change a response, use the Suggestions tab — your latest tap always counts.</div>`;
+}
+
+/* ---------------- My Suggestions (track approval status of what I submitted) ---------------- */
+async function paintSubmitted(pane){
+  let list=[];
+  try{const j=await api("my_suggestions",{studentKey:ME.id});if(j&&j.ok)list=j.suggestions||[]}catch(e){}
+  if(!list.length){pane.innerHTML=`<div class="card"><div class="note">You haven't submitted any suggestions yet.</div></div>`;return}
+  pane.innerHTML=`<div class="card">${list.map(s=>`<div class="sugg">
+    <div class="txt">${escapeHtml(s.text)}<span class="badge ${s.status}">${s.status}</span></div>
+    ${s.status==="approved"?`<div class="meta">👍 ${s.agree} agree · 👎 ${s.disagree} disagree</div>`:`<div class="meta">Waiting for the Head of School to review this.</div>`}
+  </div>`).join("")}</div>`;
+}
+
+/* ---------------- Add a suggestion ---------------- */
+function openAddSuggestion(){
+  popup({title:"➕ Add a suggestion",text:"Share your idea with the Student Council. The Head of School reviews it before everyone can see it.",input:"textarea",buttons:[
+    {label:"Cancel",cls:"ghost"},
+    {label:"Send for approval",cls:"green",keep:true,fn:async(v,o)=>{
+      const text=(v||"").trim();
+      if(!text){toast("Type your idea first");return}
+      try{
+        const j=await api("suggestion_add",{studentKey:ME.id,name:ME.name,year:ME.year,cls:ME.cls,text});
+        if(j&&j.ok){o.remove();toast("✅ Sent to the Head of School!");if(homeTab==="submitted")loadPane()}
+        else toast("Couldn't send — try again")
+      }catch(e){toast("Couldn't send — try again")}
+    }}
+  ]});
+}
+
+/* =====================================================================
+   HEAD OF SCHOOL — password-protected admin panel
+   ===================================================================== */
+function openAdminLogin(){
+  popup({title:"🔐 Head of School",text:"Enter the password to review and approve suggestions.",input:"password",buttons:[
+    {label:"Cancel",cls:"ghost"},
+    {label:"Open",cls:"green",keep:true,fn:async(v,o)=>{
+      let ok=false;
+      if(serverMode){try{const j=await api("admin_list",{password:v});ok=!!(j&&j.ok);}catch(e){ok=false}}
+      else ok=(v===HEAD_PASSWORD_LOCAL);
+      if(ok){adminPass=v;o.remove();go(screenAdmin)}
+      else{const b=o.querySelector(".pop-box");b.style.animation="none";void b.offsetWidth;b.style.animation="pop .15s"}
+    }}
+  ]});
+}
+let adminTab="pending";
+async function screenAdmin(){
+  app.innerHTML=`${hero("🔐 Head of School","Review, approve and track suggestions")}
+  <div class="tabs" id="aTabs">
+    <button class="tab" data-t="pending">🕓 Pending</button>
+    <button class="tab" data-t="approved">✅ Approved</button>
+    <button class="tab" data-t="rejected">❌ Rejected</button>
+  </div>
+  <div id="aPane"><div class="spin">⏳ Loading…</div></div>
+  <div class="center" style="margin-top:14px"><button class="btn ghost" id="back">⬅ Back to app</button></div>`;
+  const setTab=()=>document.querySelectorAll("#aTabs .tab").forEach(t=>t.classList.toggle("on",t.dataset.t===adminTab));
+  document.querySelectorAll("#aTabs .tab").forEach(t=>t.onclick=()=>{adminTab=t.dataset.t;setTab();loadAdminPane()});
+  document.getElementById("back").onclick=()=>{adminPass=null;go(ME?screenHome:screenLogin)};
+  setTab();
+  await loadAdminPane();
+}
+async function loadAdminPane(){
+  const pane=document.getElementById("aPane");
+  pane.innerHTML=`<div class="spin">⏳ Loading…</div>`;
+  let all=[];
+  try{const j=await api("admin_list",{password:adminPass});if(j&&j.ok)all=j.suggestions||[]}catch(e){}
+  const list=all.filter(s=>s.status===adminTab);
+  if(!list.length){pane.innerHTML=`<div class="card"><div class="note">Nothing here yet.</div></div>`;return}
+  pane.innerHTML=`<div class="card">${list.map(s=>`<div class="adminrow" data-id="${s.id}">
+    <div class="txt">
+      <div>${escapeHtml(s.text)}</div>
+      <div class="meta">by ${escapeHtml(s.name)||"?"} · Year ${s.year}${s.cls} ${s.status==="approved"?`· 👍 ${s.agree} 👎 ${s.disagree}`:""}</div>
+      ${s.status==="approved"?`<a class="notelink" data-details="${s.id}">view responses</a><div data-detbox="${s.id}"></div>`:""}
+    </div>
+    <div class="btns">
+      ${s.status!=="approved"?`<button class="btn sm green" data-approve>✅ Approve</button>`:""}
+      ${s.status!=="rejected"?`<button class="btn sm ghost" data-reject>🚫 Reject</button>`:""}
+      ${s.status!=="pending"?`<button class="btn sm ghost" data-pending>↩ Pending</button>`:""}
+      <button class="btn sm red" data-delete>🗑</button>
+    </div>
+  </div>`).join("")}</div>`;
+  pane.querySelectorAll("[data-approve]").forEach(b=>b.onclick=()=>setStatus(b.closest(".adminrow").dataset.id,"approved"));
+  pane.querySelectorAll("[data-reject]").forEach(b=>b.onclick=()=>setStatus(b.closest(".adminrow").dataset.id,"rejected"));
+  pane.querySelectorAll("[data-pending]").forEach(b=>b.onclick=()=>setStatus(b.closest(".adminrow").dataset.id,"pending"));
+  pane.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>{
+    const id=b.closest(".adminrow").dataset.id;
+    popup({title:"Delete this suggestion?",text:"This also removes everyone's agree/disagree responses to it.",buttons:[
+      {label:"Cancel",cls:"ghost"},
+      {label:"Delete",cls:"red",fn:async()=>{try{await api("admin_delete",{password:adminPass,id})}catch(e){}loadAdminPane()}}
+    ]});
+  });
+  pane.querySelectorAll("[data-details]").forEach(a=>a.onclick=async()=>{
+    const id=a.dataset.details,box=pane.querySelector(`[data-detbox="${id}"]`);
+    if(box.innerHTML){box.innerHTML="";return}
+    box.innerHTML="⏳";
+    try{
+      const j=await api("admin_responses",{password:adminPass,suggId:id});
+      const rows=(j&&j.ok&&j.responses)||[];
+      box.innerHTML=rows.length?rows.map(r=>`<div class="meta">${r.response==="agree"?"👍":"👎"} ${escapeHtml(r.name)||"?"} (Year ${r.year}${r.cls})${r.comment?` — "${escapeHtml(r.comment)}"`:""}</div>`).join(""):`<div class="meta">No responses yet.</div>`;
+    }catch(e){box.innerHTML=`<div class="meta">Couldn't load.</div>`}
+  });
+}
+async function setStatus(id,status){
+  try{const j=await api("admin_set_status",{password:adminPass,id,status});if(!j||!j.ok){toast("Couldn't update");return}}catch(e){toast("Couldn't update");return}
+  loadAdminPane();
+}
+
+/* =====================================================================
+   BOOT
+   ===================================================================== */
+(async function boot(){
+  app.innerHTML=`<div class="spin">⏳ Loading…</div>`;
+  await detectServer();
+  if(ME)go(screenHome);else go(screenLogin);
+})();
+</script>
+</body>
+</html>
